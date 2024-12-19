@@ -15,4 +15,8 @@ export class Course {
   addAssignment(assignment) {
     this.assignments.push(assignment);
   }
+
+ setCourseAssignments(assignments){
+  this.assignments = assignments;
+ }
 }
