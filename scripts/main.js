@@ -110,22 +110,7 @@ const createAssignment = () => {
   
   selectedCourse.addAssignment(assignment);
 
-  const currentCourseDiv = document.querySelector(`.course-block[data-course='${selectedCourse.getCourseName()}']`);
-
-  if (currentCourseDiv) {
-    const assignmentHTML = currentCourseDiv.querySelector(".assignments");
-    const gradeHTML = currentCourseDiv.querySelector(".grade");
-    const weightHTML = currentCourseDiv.querySelector(".weight");
-    
-    assignmentHTML.innerHTML += `<div class="assignment">${assignment.getAssignmentName()}</div>`;
-    gradeHTML.innerHTML += `<div class="grade">${assignment.getAssignmentGrade()}</div>`;
-    weightHTML.innerHTML += `<div class="weight">${assignment.getAssignmentWeight()}</div>`;
-
-    const predictor = new Predictor(selectedCourse, selectedCourse.getCourseAssignments());
-    const predictorDiv = currentCourseDiv.querySelector(".predictor");
-    predictorDiv.innerHTML = `Predicted Final Grade: ${predictor.getPredictedGrade()}`;
-  }
-  
+  render();
   clearInputs();
   saveToLocalStorage(courses);
 }
@@ -220,7 +205,6 @@ const render = () => {
     
     const gridElement = document.createElement('div');
     gridElement.className = 'course-block';
-    gridElement.setAttribute('data-course', course.getCourseName());
     gridElement.innerHTML = `
       <div class="grid">
         <div class="course course-name">Course: ${course.getCourseName()}
@@ -247,10 +231,17 @@ const render = () => {
   });
 }
 
+
+/*
+delete assignment:
+deletes the selected assignment from the selected course using 
+the splice method to remove the assignment from the array
+*/
+
 function deleteAssignment(assignmentName, courseName){
   const selectedCourse = courses.find(course => course.getCourseName() === courseName);
-  const selectedAssignment = selectedCourse.getCourseAssignments().find(assignment => assignment.getAssignmentName() === assignmentName);
-  selectedCourse.getCourseAssignments().splice(selectedAssignment, 1);
+  const selectedAssignmentIndex = selectedCourse.getCourseAssignments().findIndex(assignment => assignment.getAssignmentName() === assignmentName);
+  selectedCourse.getCourseAssignments().splice(selectedAssignmentIndex, 1);
   render();
   saveToLocalStorage(courses);
 }
@@ -268,5 +259,6 @@ function deleteCourse(courseName){
   };
 
   courses = courses.filter(course => course.getCourseName() !== courseName);
+  render();
   saveToLocalStorage(courses);
 }
