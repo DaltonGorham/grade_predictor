@@ -23,6 +23,7 @@ let courses = JSON.parse(localStorage.getItem('coursesToSave')) || [];
 document.addEventListener('DOMContentLoaded', () => {
   // convert courses from strings to objects
   courses = loadFromLocalStorage(courses);
+  updateCourseSuggestions();
   render();
   
 
@@ -144,6 +145,7 @@ const addCourse = () => {
   }
   courses.push(course);
   console.log(courses);
+  updateCourseSuggestions();
   render();
   clearInputs();
   saveToLocalStorage(courses);
@@ -213,7 +215,7 @@ const render = () => {
         <div class="assignments assignments-name">Assignments:</div>
         <div class="grade grade-name">Grade:</div>
         <div class="weight weight-name">Weight:</div>
-        <div class="predictor predictor-name">Predicted Final Grade: ${predictor.getPredictedGrade()}</div>
+        <div class="predictor predictor-name">Final Grade: <span class="predictor-grade">${predictor.getPredictedGrade()}</span></div>
       </div>`;
     appHTML.appendChild(gridElement);
     
@@ -259,6 +261,19 @@ function deleteCourse(courseName){
   };
 
   courses = courses.filter(course => course.getCourseName() !== courseName);
+  updateCourseSuggestions();
   render();
   saveToLocalStorage(courses);
+}
+
+
+// Update Course Suggestions for each course in the course array
+function updateCourseSuggestions(){
+  const datalist = document.querySelector("#course-suggestions");
+  datalist.innerHTML = "";
+  courses.forEach(course => {
+    const option = document.createElement("option");
+    option.value = course.getCourseName();
+    datalist.appendChild(option);
+  })
 }

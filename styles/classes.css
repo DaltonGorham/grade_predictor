@@ -5,35 +5,48 @@
   gap: 50px;
   font-family: roboto;
   font-size: 20px;
+  
 }
+
+.grade-calculator-container{
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  padding-top: 20px;
+}
+
 
 .input-container{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
-  justify-content: center;
-  align-items: start;
-  flex-wrap: wrap;
+  align-items: center;
   padding: 20px;
-  width: 300px;
+  padding-bottom: 30px;
   font-family: roboto;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
+
+
+
 #course-name, #assignment-name, #assignment-grade, #assignment-weight{
-  width: 100%;
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
   font-family: roboto;
   font-size: 16px;
+  width: 300px;
 }
 
 
 .instructions-container{
   display: flex;
-  justify-content: start;
+  justify-content: center;
   padding: 20px;
-  width: 300px;
+  width: 100%;
 }
 
 .instructions{
@@ -44,23 +57,27 @@
   flex-wrap: wrap;
   padding: 20px;
   font-size: 20px;
-  width: 100%;
+  width:  300px;
   border: 1px solid black;
   border-radius: 10px;
   background-color: #f0f0f0;
+  margin-right: 30px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6);
   grid-template-rows: 1fr;
-  border: 1px solid black;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; 
   position: relative;
+  border-radius: 10px;
+  padding: 5px;
+  width: 100%;
 }
 
-.assignment, .grades, .weights {
-  font-weight: 100;
+.assignment, .grades, .weights,.predictor-grade {
+  font-weight: 200;
   font-size: 16px;
   position: relative;
   padding: 5px;
@@ -72,10 +89,6 @@
 }
 
 
-.predictor {
-  display: grid;
-  grid-template-columns: 1fr;
-}
 
 .course-name, .assignments-name, .grade-name, .weight-name, .predictor-name{
   font-weight: bold;
@@ -84,29 +97,84 @@
 
 .delete-course{
   position: absolute;
-  top: -25px;
+  top: -30px;
   left: 2px;
-  background-color: red;
+  background-color: #f33131;
   color: white;
-  border: 1px solid black;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
+  padding: 4px 8px;
 }
 
 .delete-assignment{
   position: absolute;
   top: 0px;
-  background-color: red;
+  background-color: #f33131;
   left: 100px;
   top: 3px;
   color: white;
-  border: 1px solid black;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 14px;
+  padding: 4px 8px;
+  opacity: 0;
+  transition: 0.3s;
 }
 
 .delete-course:hover{
   opacity: 0.6;
 }
 
+.delete-assignment:hover{
+  opacity: 1;
+  transition: 0.3s;
+}
 
+@media (max-width: 768px) {
+  .input-container{
+    flex-direction: column;
+    width: 100%;
+  }
+  .grid{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .course-name, .assignments-name, .grade-name, .weight-name, .predictor-name{
+    font-size: 12px;
+  }
+  .assignment, .grades, .weights, .predictor-grade{
+    font-size: 11px;
+    font-weight: 200;
+  }
+
+  .delete-assignment{
+    position: absolute;
+    background-color: #f33131;
+    color: white;
+    border: none;
+    top: 2px;
+    left: -93px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 9px;
+    opacity: 1;
+    transition: 0.3s;
+  }
+
+  .delete-course{
+    position: absolute;
+    font-size: 9px;
+    padding-right: 23px;
+    top: -25px;
+    left: 2px;
+  }
+  
+ .instructions-container{
+  width: 318px;
+  margin-left:  90px;
+  padding: 10px;
+  
+ }
+}
