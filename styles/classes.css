@@ -8,11 +8,12 @@
   
 }
 
+
 .grade-calculator-container{
   display: flex;
   justify-content: center;
   font-size: 20px;
-  padding-top: 20px;
+  padding: 20px;
 }
 
 
@@ -76,13 +77,23 @@
   width: 100%;
 }
 
-.assignment, .grades, .weights,.predictor-grade {
+.assignment, .grades, .weights,.predictor-grade{
   font-weight: 200;
   font-size: 16px;
   position: relative;
   padding: 5px;
   border-bottom: solid 1px black;
 }
+
+.predictor-grade{
+  width: fit-content;
+}
+
+.course{
+  border-bottom: none;
+  padding: 5px;
+}
+
 
 .assignment:last-child, .grades:last-child, .weights:last-child{
   border-bottom: none;
@@ -119,8 +130,7 @@
   cursor: pointer;
   font-size: 14px;
   padding: 4px 8px;
-  opacity: 0;
-  transition: 0.3s;
+ 
 }
 
 .delete-course:hover{
@@ -133,48 +143,84 @@
 }
 
 @media (max-width: 768px) {
-  .input-container{
-    flex-direction: column;
-    width: 100%;
+
+  .app{
+    padding: 10px;
+    justify-content: center;
   }
+  .input-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 30px;
+  }
+
+  #course-name, #assignment-name, #assignment-grade, #assignment-weight{
+    width: 250px;
+    display: flex;
+    max-width: 100%;
+  }
+
   .grid{
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 10px;
+    width: calc(100% - 5px);
   }
+
+  
   .course-name, .assignments-name, .grade-name, .weight-name, .predictor-name{
-    font-size: 12px;
+    font-size: 10px;
   }
-  .assignment, .grades, .weights, .predictor-grade{
+  .assignment, .grades, .weights, .predictor-grade,.course{
     font-size: 11px;
     font-weight: 200;
+    padding: 5px;
   }
+
 
   .delete-assignment{
     position: absolute;
     background-color: #f33131;
     color: white;
     border: none;
-    top: 2px;
-    left: -93px;
+    top: 3.5px;
+    left: -28px;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 9px;
+    font-size: 8px;
     opacity: 1;
-    transition: 0.3s;
   }
 
   .delete-course{
     position: absolute;
-    font-size: 9px;
-    padding-right: 23px;
+    font-size: 8px;
     top: -25px;
     left: 2px;
   }
+
+  .grade-calculator-container{
+    width: calc(100% - 20px);
+    justify-content: center;
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  .grade-calculator-header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   
- .instructions-container{
-  width: 318px;
-  margin-left:  90px;
-  padding: 10px;
+  .instructions-container{
+    width: calc(100% - 20px);
+    display: flex;
+  }
+
+  .instructions{
+    width: 100%;
+  }
   
- }
+  
+
 }

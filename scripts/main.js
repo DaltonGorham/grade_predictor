@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   courses = loadFromLocalStorage(courses);
   updateCourseSuggestions();
   render();
-  
 
 
 // Initial Check for courses
@@ -37,6 +36,13 @@ if (courses.length === 0) {
 }
 
 // Event Listeners
+
+
+window.addEventListener('resize', () => {
+  updateButtonText();
+});
+
+
 courseInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     addCourse();
@@ -74,6 +80,7 @@ document.addEventListener('click', (e) => {
   }
 
 });
+
 
 });
 
@@ -209,13 +216,15 @@ const render = () => {
     gridElement.className = 'course-block';
     gridElement.innerHTML = `
       <div class="grid">
-        <div class="course course-name">Course: ${course.getCourseName()}
+        <div class="course-name">
+          Course:
+          <div class="course">${course.getCourseName()}</div>
           <button class="delete-course" data-course="${course.getCourseName()}">Delete Course</button>
         </div>
         <div class="assignments assignments-name">Assignments:</div>
         <div class="grade grade-name">Grade:</div>
         <div class="weight weight-name">Weight:</div>
-        <div class="predictor predictor-name">Final Grade: <span class="predictor-grade">${predictor.getPredictedGrade()}</span></div>
+        <div class="predictor predictor-name">Final Grade: <div class="predictor-grade">${predictor.getPredictedGrade()}</div></div>
       </div>`;
     appHTML.appendChild(gridElement);
     
@@ -231,6 +240,7 @@ const render = () => {
       weightHTML.innerHTML += `<div class="weights">${assignment.getAssignmentWeight()}</div>`;
     });
   });
+  updateButtonText();
 }
 
 
@@ -275,5 +285,21 @@ function updateCourseSuggestions(){
     const option = document.createElement("option");
     option.value = course.getCourseName();
     datalist.appendChild(option);
+  })
+}
+
+
+// Update Delete Button for mobile devices or smaller screen widths
+function updateButtonText(){
+  const deleteButtons = document.querySelectorAll(".delete-assignment");
+  const isMobile = window.innerWidth <= 768;
+
+  deleteButtons.forEach(button => {
+    if (isMobile){
+      button.textContent = "X";
+    }
+    else{
+      button.textContent = "Delete Assignment";
+    }
   })
 }
